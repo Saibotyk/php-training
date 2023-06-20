@@ -4,7 +4,137 @@ $array = [12, 65, 95, 41, 85, 63, 71, 64];
 
 $arrayA = [12, "le", 95, 12, 85, "le", 71, "toi", 95, "la"];
 $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
+/**
+ * return a list of values from an array of values (string or int)
+ *
+ * @param array $array
+ * @return string
+ */
+function returnList(array $array): string
+{
+    $list = "";
+    foreach ($array as $value) {
+        $list .= "<li>" . $value . "</li>";
+    }
+    return $list;
+}
+/**
+ * return a list of even values from an array of values (int)
+ *
+ * @param array $array
+ * @return string
+ */
+function returnEvenNumber(array $array): string
+{
+    $list = "";
+    foreach ($array as $value) {
+        if ($value % 2 == 0)
+            $list .= "<li>" . $value . "</li>";
+    }
+    return $list;
+}
+/**
+ * return a list of even index from an array of values (string or int)
+ *
+ * @param array $array
+ * @return string
+ */
+function returnEvenIndex(array $array): string
+{
+    $list = "";
+    foreach ($array as $i => $value) {
+        if ($i % 2 == 0)
+            $list .= "<li>" . $value . "</li>";
+    }
+    return $list;
+}
+/**
+ * return a list of values from an array of values (string or int) with a double value
+ *
+ * @param array $array
+ * @return string
+ */
+function returnDoubleValue(array $array): string
+{
+    $list = "";
+    foreach ($array as $value) {
+        $list .= "<li>" . ($value *= 2) . "</li>";
+    }
+    return $list;
+}
+/**
+ * return a list of values from an array of values (string or int) with a half value
+ *
+ * @param array $array
+ * @param integer $number
+ * @return string
+ */
+function returnHalfValue(array $array, int $number): string
+{
+    $list = "";
+    foreach ($array as $value) {
+        $list .= "<li>" . ($value /= $number) . "</li>";
+    }
+    return $list;
+}
+/**
+ * return a list of values from an array without double values (string or int)
+ *
+ * @param array $array
+ * @return string
+ */
+function returnValuesWithoutDouble(array $array): string
+{
+    $array = array_unique($array);
+    $list = "";
+    foreach ($array as $i => $value) {
+        $list .= "<li>" . $value . "</li>";
+    }
+    return $list;
+}
+/**
+ * return intersection of two arrays (string or int)
+ *
+ * @param array $arrayA
+ * @param array $arrayB
+ * @return array
+ */
+function returnIntersection(array $arrayA, array $arrayB): array
+{
+    $array = array_intersect($arrayA, $arrayB);
+    return $array;
+}
 
+/**
+ * return values of first array which are not in second array (string or int)
+ *
+ * @param array $arrayA
+ * @param array $arrayB
+ * @return array
+ */
+function returnValuesNotInSecondArray(array $arrayA, array $arrayB): array
+{
+    $array = array_diff($arrayA, $arrayB);
+    return $array;
+}
+/**
+ * return values of first array which are not in second array (string or int)
+ *
+ * @param array $arrayA
+ * @param array $arrayB
+ * @param boolean $bool
+ * @return array
+ */
+function returnValuesNotInSecondArrayWithBool(array $arrayA, array $arrayB, bool $bool): array
+{
+    if ($bool) {
+        $array = array_diff($arrayA, $arrayB);
+        $array = array_unique($array);
+    } else {
+        $array = array_diff($arrayA, $arrayB);
+    }
+    return $array;
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -38,7 +168,10 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
             <h2 class="exercice-ttl">Question 1</h2>
             <p class="exercice-txt">Déclarer une fonction qui prend en paramètre un tableau et retourne la chaîne de caractère HTML permettant d'afficher les valeurs du tableau sous la forme d'une liste.</p>
             <div class="exercice-sandbox">
-
+                <?php
+                $listHTML = returnList($array);
+                echo "<ul>" . $listHTML . "</ul>";
+                ?>
             </div>
         </section>
 
@@ -47,7 +180,10 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
             <h2 class="exercice-ttl">Question 2</h2>
             <p class="exercice-txt">Déclarer une fonction qui prend en paramètre un tableau d'entiers et retourne uniquement les valeurs paires. Afficher les valeurs du tableau sous la forme d'une liste HTML.</p>
             <div class="exercice-sandbox">
-
+                <?php
+                $listHTML2 = returnEvenNumber($array);
+                echo "<ul>" . $listHTML2 . "</ul>";
+                ?>
             </div>
         </section>
 
@@ -56,7 +192,10 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
             <h2 class="exercice-ttl">Question 3</h2>
             <p class="exercice-txt">Déclarer une fonction qui prend en paramètre un tableau d'entiers et retourne uniquement les entiers d'index pair</p>
             <div class="exercice-sandbox">
-
+                <?php
+                $listHTML3 = returnEvenIndex($array);
+                echo "<ul>" . $listHTML3 . "</ul>";
+                ?>
             </div>
         </section>
 
@@ -65,7 +204,10 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
             <h2 class="exercice-ttl">Question 4</h2>
             <p class="exercice-txt">Déclarer une fonction qui prend en paramètre un tableau d'entiers. La fonction doit retourner les valeurs du tableau mulipliées par 2.</p>
             <div class="exercice-sandbox">
-
+                <?php
+                $listHTML4 = returnDoubleValue($array);
+                echo "<ul>" . $listHTML4 . "</ul>";
+                ?>
             </div>
         </section>
 
@@ -74,7 +216,11 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
             <h2 class="exercice-ttl">Question 4 bis</h2>
             <p class="exercice-txt">Déclarer une fonction qui prend en paramètre un tableau d'entiers et un entier. La fonction doit retourner les valeurs du tableau divisées par le second paramètre</p>
             <div class="exercice-sandbox">
-
+                <?php
+                $int = 2;
+                $listHTML5 = returnHalfValue($array, $int);
+                echo "<ul>" . $listHTML5 . "</ul>";
+                ?>
             </div>
         </section>
 
@@ -83,7 +229,10 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
             <h2 class="exercice-ttl">Question 5</h2>
             <p class="exercice-txt">Déclarer une fonction qui prend en paramètre un tableau d'entiers ou de chaînes de caractères et retourne le tableau sans doublons</p>
             <div class="exercice-sandbox">
-
+                <?php
+                $listHTML6 = returnValuesWithoutDouble($arrayA);
+                echo "<ul>" . $listHTML6 . "</ul>";
+                ?>
             </div>
         </section>
 
@@ -92,7 +241,10 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
             <h2 class="exercice-ttl">Question 6</h2>
             <p class="exercice-txt">Déclarer une fonction qui prend en paramètre 2 tableaux et retourne un tableau représentant l'intersection des 2</p>
             <div class="exercice-sandbox">
-
+                <?php
+                $arrayC = returnIntersection($arrayA, $arrayB);
+                var_dump($arrayC);
+                ?>
             </div>
         </section>
 
@@ -101,7 +253,10 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
             <h2 class="exercice-ttl">Question 7</h2>
             <p class="exercice-txt">Déclarer une fonction qui prend en paramètre 2 tableaux et retourne un tableau des valeurs du premier tableau qui ne sont pas dans le second</p>
             <div class="exercice-sandbox">
-
+            <?php
+                $arrayD = returnValuesNotInSecondArray($arrayA, $arrayB);
+                var_dump($arrayD);
+                ?>
             </div>
         </section>
 
@@ -111,7 +266,10 @@ $arrayB = [85, "toi", 95, "la", 65, 94, 85, "avec", 37, "chat"];
             <h2 class="exercice-ttl">Question 8</h2>
             <p class="exercice-txt">Réécrire la fonction précédente pour lui ajouter un paramètre booléen facultatif. Si celui-ci est à true, le tableau retourné sera sans doublons</p>
             <div class="exercice-sandbox">
-
+                <?php
+                $arrayE = returnValuesNotInSecondArray($arrayA, $arrayB, true);
+                var_dump($arrayE);
+                ?>
             </div>
         </section>
 
